@@ -1,0 +1,63 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameMovement : MonoBehaviour
+{
+    Rigidbody2D rb;
+    [SerializeField] float jumpSpeed;
+    [SerializeField] float fallSpeed;
+    [SerializeField] float friccion;
+    [SerializeField] float acceleration;
+    [SerializeField] float maxVelocity = 7f;
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = this.GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Vector2 movement = Vector2.zero;
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.velocity = new Vector2(acceleration, rb.velocity.y);
+            movement.x += 1;
+            if(acceleration >= maxVelocity)
+            {
+                acceleration = maxVelocity;
+            }
+            else
+            {
+                acceleration += 0.4f;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.velocity = new Vector2(-acceleration, rb.velocity.y);
+            movement.x -= 1;
+            if (acceleration >= maxVelocity)
+            {
+                acceleration = maxVelocity;
+            }
+            else
+            {
+                acceleration += 0.4f;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.velocity = new Vector2( rb.velocity.x, jumpSpeed);
+            
+        }
+
+
+
+        rb.velocity += movement * acceleration * Time.deltaTime;
+
+    }
+}
+
