@@ -23,37 +23,25 @@ public class GameMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            rb.velocity = new Vector2(acceleration, rb.velocity.y);
+           
             movement.x += 1;
-            if(acceleration >= maxVelocity)
-            {
-                acceleration = maxVelocity;
-            }
-            else
-            {
-                acceleration += 0.4f;
-            }
+        
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            rb.velocity = new Vector2(-acceleration, rb.velocity.y);
             movement.x -= 1;
-            if (acceleration >= maxVelocity)
-            {
-                acceleration = maxVelocity;
-            }
-            else
-            {
-                acceleration += 0.4f;
-            }
+           
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = new Vector2( rb.velocity.x, jumpSpeed);
             
         }
+        if(rb.velocity.y == maxVelocity)
+        {
 
+        }
 
 
         rb.velocity += movement * acceleration * Time.deltaTime;
