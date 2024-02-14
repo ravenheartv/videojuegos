@@ -9,7 +9,7 @@ public class GameMovement : MonoBehaviour
     [SerializeField] float fallSpeed;
     [SerializeField] float friccion;
     [SerializeField] float acceleration;
-    [SerializeField] float maxVelocity = 7f;
+    [SerializeField] float maxHorizontalVelocity = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +38,9 @@ public class GameMovement : MonoBehaviour
             rb.velocity = new Vector2( rb.velocity.x, jumpSpeed);
             
         }
-        if(rb.velocity.y == maxVelocity)
+        if(rb.velocity.y == maxHorizontalVelocity)
         {
-
+            rb.velocity = new Vector2(maxHorizontalVelocity, rb.velocity.x);
         }
 
 
