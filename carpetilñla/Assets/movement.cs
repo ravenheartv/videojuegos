@@ -22,18 +22,18 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = Vector2.zero;
+        Vector2 movementInput = Vector2.zero;
 
         if (Input.GetKey(KeyCode.D))
         {
 
-            movement.x += 1;
+            movementInput.x += 1;
 
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            movement.x -= 1;
+            movementInput.x -= 1;
 
         }
         if (Input.GetKeyDown(KeyCode.Space))
@@ -41,13 +41,15 @@ public class movement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
 
         }
-        if (rb.velocity.y == maxHorizontalVelocity)
+        if(Mathf.Abs(rb.velocity.x) > maxHorizontalVelocity)
         {
-            rb.velocity = new Vector2(maxHorizontalVelocity, rb.velocity.x);
+            rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxHorizontalVelocity, maxHorizontalVelocity) , rb.velocity.y);
         }
+        else
+       
 
 
-        rb.velocity += movement * acceleration * Time.deltaTime;
+        rb.velocity += movementInput * acceleration * Time.deltaTime;
 
     }
    
